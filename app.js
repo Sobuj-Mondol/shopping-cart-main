@@ -1,5 +1,4 @@
 // functional mathod----------caseing
-
 function updateCaseNumber(isIncreasing){
     let caseInput = document.getElementById('case-number');
     let caseNumber = caseInput.value;
@@ -13,7 +12,9 @@ function updateCaseNumber(isIncreasing){
     caseInput.value = caseNumber;
     //update case total
     let caseTotal = document.getElementById('case-total');
-    caseTotal.innerText = caseNumber * 59;  
+    caseTotal.innerText = caseNumber * 59;
+    //pudate subTotal
+    calculateTotal();
 };
 // functional mathod----------phone
 function updatePhoneNumber(isIncreasing){
@@ -29,9 +30,25 @@ function updatePhoneNumber(isIncreasing){
     //update phone total
     let phoneTotal = document.getElementById('phone-total');
     phoneTotal.innerText = phoneNumber * 1219;
+    //pudate subTotal
+    calculateTotal();
 };
-
-
+// total price calculate
+function getInputValue(product){
+    let productInput = document.getElementById(product + '-number');
+    let productNumber = parseInt(productInput.value);
+    return productNumber;
+}
+function calculateTotal(){
+    let phoneTotal = getInputValue('phone')*1219;
+    let caseTotal = getInputValue('case')*59;
+    let subTotal = phoneTotal + caseTotal;
+    let text = subTotal / 10;
+    let totaPrice = subTotal + text;
+    document.getElementById('sub-total').innerText = subTotal;
+    document.getElementById('text-amount').innerText = text;
+    document.getElementById('total-price').innerText = totaPrice;
+}
 // phone increase decrease events
 // functional chara mathod-----------
 document.getElementById('phone-plus').addEventListener('click',function(){
@@ -46,7 +63,6 @@ document.getElementById('phone-minus').addEventListener('click',function(){
      */
     updatePhoneNumber(false);
 });
-
 // handel caseing increase decrease events
 // functional chara mathod-----------
 document.getElementById('case-plus').addEventListener('click', function(){
@@ -60,4 +76,4 @@ document.getElementById('case-minus').addEventListener('click', function(){
     caseNumber = caseInput.value;
     caseInput.value = parseInt(caseNumber)-1; */
     updateCaseNumber(false);
-})
+});
